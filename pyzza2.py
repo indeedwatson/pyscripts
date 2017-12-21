@@ -1,21 +1,9 @@
 #!/usr/bin/python3
 import sys
+import json
 
-# dough recipes in baker's percentage
-recipes = {'neapolitan': {'water': 70, 'salt': 3, 'yeast': 1},
-           'masterdough': {'water': 68, 'salt': 3, 'yeast': 1.5, 'oil': 2,
-           'sugar': 1},
-           'chicago': {'water': 60, 'salt': 2, 'yeast': 0.1, 'lard': 1,
-                       'butter': 1},
-           'sicilian': {'water': 70, 'salt': 2, 'yeast': 1, 'malt': 2,
-                        'oil': 1},
-           'refrigerated': {'water': 70, 'salt': 2.6, 'yeast': 0.3},
-           'tortilla': {'lard': 20, 'water': 70, 'salt': 2},
-           'serious eats neapolitan': {'water': 65, 'salt': 2, 'IDY': 1.5},
-           'serious eats NY': {'water': 67, 'sugar': 2, 'salt': 1.5,
-           'olive oil': 5}}
-
-
+with open('recipes.json', 'r') as f:
+    recipes = json.load(f)
 
 def bakerCalc(flour, style=recipes['masterdough']):
     """ Take an amount of flour and calculate the rest of the ingredients
@@ -43,9 +31,25 @@ def printTable(style):
 
 choice = ''
 
+def gen_nav_list(recipes_dict, reserved_words_list):
+    return list(recipes_dict.keys()) + reserved_words_list
+
+def calc_autocomp(auto_list, choice_str):
+    if len(choice_str) > 0:
+        return list(filter(lambda auto_str: auto_str.startswith(choice_str), auto_list))
+    return []
+
+autocomp_list = gen_nav_list(recipes, ['recipes', 'exit', 'quit'])
+
 while not choice.isdigit() or choice not in recipes:
     print("Type a number or 'recipes':")
     choice = input('> ').lower()
+    
+    # if autocomplete is triggered
+    auto_choices = calc_autocomp(autocomp_list, choice)
+    if len(auto_choices) == 1:
+        choice = auto_choices[0]
+    
     if choice.isdigit():
         workingRecipe = bakerCalc(choice)
         printTable(workingRecipe)
