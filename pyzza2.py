@@ -25,7 +25,7 @@ def printTable(style):
     # was trying to print the title of the recipe but I can't figure it out
     # print(str(style.keys).upper().center(lWidth + rWidth, '-'))
     print('\n')
-    print('flour'.title().ljust(lWidth, '.') + flour.rjust(rWidth))
+    print('flour'.title().ljust(lWidth, '.') + choice.rjust(rWidth))
     for i in style.keys():
         print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
     print('\n')
