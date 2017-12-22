@@ -5,6 +5,7 @@ import json
 with open('recipes.json', 'r') as f:
     recipes = json.load(f)
 
+
 def bakerCalc(flour, style=recipes['masterdough']):
     """ Take an amount of flour and calculate the rest of the ingredients
     Defaults to masterdough if no recipe is specified
@@ -29,18 +30,20 @@ def printTable(style):
         print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
     print('\n')
 
-choice = ''
 
 def gen_nav_list(recipes_dict, reserved_words_list):
     return list(recipes_dict.keys()) + reserved_words_list
+
 
 def calc_autocomp(auto_list, choice_str):
     if len(choice_str) > 0:
         return list(filter(lambda auto_str: auto_str.startswith(choice_str), auto_list))
     return []
 
+
 autocomp_list = gen_nav_list(recipes, ['recipes', 'exit', 'quit'])
 
+choice = ''
 while not choice.isdigit() or choice not in recipes:
     print("Type a number or 'recipes':")
     choice = input('> ').lower()
