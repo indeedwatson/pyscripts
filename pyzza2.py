@@ -47,7 +47,7 @@ def printTable(style):
     # was trying to print the title of the recipe but I can't figure it out
     # print(str(style.keys).upper().center(lWidth + rWidth, '-'))
     print('\n')
-    print('flour'.title().ljust(lWidth, '.') + choice.rjust(rWidth))
+    print('flour'.title().ljust(lWidth, '.') + flour.rjust(rWidth))
     for i in style.keys():
         print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
     print('\n')
@@ -62,7 +62,8 @@ while not choice.isdigit() or choice not in recipes:
     print("Type a number or 'recipes':")
     choice = input('> ').lower()
     if choice.isdigit():
-        workingRecipe = bakerCalc(choice)
+        flour = choice
+        workingRecipe = bakerCalc(flour)
         printTable(workingRecipe)
     elif choice in recipes:
         flour = ''
@@ -82,3 +83,4 @@ while not choice.isdigit() or choice not in recipes:
 # TODO
 # tab autocompletion
 # add recipes
+# print recipes in columns
