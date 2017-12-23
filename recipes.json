@@ -6,5 +6,5 @@
     "refrigerated": {"water": 70, "salt": 2.6, "yeast": 0.3},
     "tortilla": {"lard": 20, "water": 70, "salt": 2},
     "serious eats neapolitan": {"water": 65, "salt": 2, "IDY": 1.5},
-    "serious eats NY": {"water": 67, "sugar": 2, "salt": 1.5,"olive oil": 5}
+    "serious eats ny": {"water": 67, "sugar": 2, "salt": 1.5,"olive oil": 5}
 }
