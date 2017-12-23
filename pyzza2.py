@@ -1,9 +1,31 @@
 #!/usr/bin/python3
 import sys
 import json
+import readline
 
 with open('recipes.json', 'r') as f:
     recipes = json.load(f)
+
+
+class autoComplete(object):
+
+    def __init__(self, options):
+        self.options = sorted(options)
+        return
+
+    def complete(self, text, state):
+        if state == 0:  # on first trigger, build possible matches
+            if text:  # cache matches
+                self.matches = [s for s in self.options
+                                    if s and s.startswith(text)]
+            else:  # no text entered, all matches possible
+                self.matches = self.options[:]
+
+        # return match indexed by state
+        try:
+            return self.matches[state]
+        except IndexError:
+            return None
 
 
 def bakerCalc(flour, style=recipes['masterdough']):
@@ -31,28 +53,14 @@ def printTable(style):
     print('\n')
 
 
-def gen_nav_list(recipes_dict, reserved_words_list):
-    return list(recipes_dict.keys()) + reserved_words_list
-
-
-def calc_autocomp(auto_list, choice_str):
-    if len(choice_str) > 0:
-        return list(filter(lambda auto_str: auto_str.startswith(choice_str), auto_list))
-    return []
-
-
-autocomp_list = gen_nav_list(recipes, ['recipes', 'exit', 'quit'])
+completer = autoComplete(recipes.keys())
+readline.set_completer(completer.complete)
+readline.parse_and_bind('tab: complete')
 
 choice = ''
 while not choice.isdigit() or choice not in recipes:
     print("Type a number or 'recipes':")
     choice = input('> ').lower()
-    
-    # if autocomplete is triggered
-    auto_choices = calc_autocomp(autocomp_list, choice)
-    if len(auto_choices) == 1:
-        choice = auto_choices[0]
-    
     if choice.isdigit():
         workingRecipe = bakerCalc(choice)
         printTable(workingRecipe)
