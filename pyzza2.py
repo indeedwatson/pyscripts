@@ -17,7 +17,7 @@ class autoComplete(object):
         if state == 0:  # on first trigger, build possible matches
             if text:  # cache matches
                 self.matches = [s for s in self.options
-                                    if s and s.startswith(text)]
+                                    if text in s]
             else:  # no text entered, all matches possible
                 self.matches = self.options[:]
 
