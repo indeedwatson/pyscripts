@@ -59,6 +59,9 @@ readline.parse_and_bind('tab: complete')
 
 choice = ''
 while not choice.isdigit() or choice not in recipes:
+    for r in recipes:
+        alignedRows = "{:^15} {:^15} {:^15}".format(*r)
+        print(alignedRows)
     print("Type a number or 'recipes':")
     choice = input('> ').lower()
     if choice.isdigit():
