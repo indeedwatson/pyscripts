@@ -3,7 +3,7 @@ import sys
 import json
 import readline
 
-with open('recipes.json', 'r') as f:
+with open('/home/yama/Documents/pyscripts/recipes.json', 'r') as f:
     recipes = json.load(f)
 
 
@@ -28,13 +28,13 @@ class autoComplete(object):
             return None
 
 
-def bakerCalc(flour, style=recipes['masterdough']):
+def bakerCalc(flour, style=recipes['dopny']):
     """ Take an amount of flour and calculate the rest of the ingredients
-    Defaults to masterdough if no recipe is specified
+    Defaults to dopny if no recipe is specified
     """
     workingRecipe = {}
     for i in style.keys():
-        ingredient = int(flour) * int(style[i]) / 100
+        ingredient = float(flour) * float(style[i]) / 100
         workingRecipe[i] = ingredient
     return workingRecipe
 
