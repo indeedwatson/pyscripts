@@ -3,7 +3,7 @@ import sys
 import json
 import readline
 
-with open('/home/yama/Documents/pyscripts/recipes.json', 'r') as f:
+with open('./recipes.json', 'r') as f:
     recipes = json.load(f)
 
 
