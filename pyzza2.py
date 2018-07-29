@@ -59,15 +59,21 @@ readline.parse_and_bind('tab: complete')
 
 choice = ''
 while not choice.isdigit() or choice not in recipes:
-    for r in recipes:
-        alignedRows = "{:^15} {:^15} {:^15}".format(*r)
-        print(alignedRows)
-    print("Type a number or 'recipes':")
+    indx = 1
+    print("Choose a recipe:\n")
+    while indx < len(recipes):
+        for r in recipes.keys():
+            if indx % 3 == 0:
+                print("\t", r)
+            else:
+                print("\t", r.title().ljust(18, ' '), end='    ')
+            indx = indx + 1
+    print("\n\nOr enter the desired amount of flour:\n")
     choice = input('> ').lower()
     if choice.isdigit():
         flour = choice
-        workingRecipe = bakerCalc(flour)
-        printTable(workingRecipe)
+        #workingRecipe = bakerCalc(flour)
+        printTable(bakerCalc(flour))
     elif choice in recipes:
         flour = ''
         while not flour.isdigit():
