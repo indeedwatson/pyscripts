@@ -2,7 +2,7 @@
 Simple baker's % calculator for the terminal written in python3.
 
 ## Usage
-![Image](pyscripts/img-2018-09-07-011419.png?raw=true)
+![Image](pyscripts/img-2018-09-07-011419.png)
 
 Jusy copy pyzza2.py and recipes.json to your computer and then do:
 `python pyzza2.py`
