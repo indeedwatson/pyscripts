@@ -4,8 +4,8 @@
     "sicilian": {"water": 70, "salt": 2, "yeast": 1, "malt": 2, "oil": 1},
     "refrigerated": {"water": 70, "salt": 2.6, "yeast": 0.3},
     "tortilla": {"lard": 20, "water": 70, "salt": 2},
-    "SE ny": {"water": 67, "sugar": 2, "salt": 1.5,"olive oil": 5},
+    "seriouseats ny": {"water": 67, "sugar": 2, "salt": 1.5,"olive oil": 5},
     "dopny": {"water": 61, "sugar": 2, "salt": 1.75, "oil": 3, "yeast": 0.5, "malt": 0.25},
     "roman": {"water": 52, "salt": 2, "sugar": 1.1, "yeast": 0.77},
-    "Pain a l'Ancienne Rustic Bread": {"water": 80, "salt": 1.95, "IDY": 0.7}
+    "pain a l'ancienne rustic bread": {"water": 80, "salt": 1.95, "IDY": 0.7}
 }
