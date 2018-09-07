@@ -44,14 +44,20 @@ def printTable(style):
 
     lWidth = 12
     rWidth = 7
+    totalIngredients = 0
     # was trying to print the title of the recipe but I can't figure it out
     # print(str(style.keys).upper().center(lWidth + rWidth, '-'))
     print('\n')
     print('flour'.title().ljust(lWidth, '.') + flour.rjust(rWidth))
-    for i in style.keys():
+    for i, amount in style.items():
         print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
+        totalIngredients = totalIngredients + amount
     print('\n')
-
+    totalIngredients = totalIngredients + int(flour)
+    
+    pies = round(totalIngredients / 260)
+    print('That should be enough for ' + str(pies) + ' pies (' +
+            str(round(totalIngredients / pies)) + ' each)')
 
 completer = autoComplete(recipes.keys())
 readline.set_completer(completer.complete)
@@ -59,20 +65,19 @@ readline.parse_and_bind('tab: complete')
 
 choice = ''
 while not choice.isdigit() or choice not in recipes:
-    indx = 1
     print("Choose a recipe:\n")
+    indx = 1
     while indx < len(recipes):
         for r in recipes.keys():
             if indx % 3 == 0:
-                print("\t", r)
+                print(str(indx) + '.', r)
             else:
-                print("\t", r.title().ljust(18, ' '), end='    ')
+                print(str(indx) + '.', r.title().ljust(18, ' '), end=' ')
             indx = indx + 1
-    print("\n\nOr enter the desired amount of flour:\n")
+    print("\nOr enter the desired amount of flour:\n")
     choice = input('> ').lower()
     if choice.isdigit():
         flour = choice
-        #workingRecipe = bakerCalc(flour)
         printTable(bakerCalc(flour))
     elif choice in recipes:
         flour = ''
@@ -80,14 +85,10 @@ while not choice.isdigit() or choice not in recipes:
             flour = input('Type the desired amount of flour: ')
         workingRecipe = bakerCalc(flour, recipes[choice])
         printTable(workingRecipe)
-    elif choice == 'recipes':
-        print('\n')
-        for r in recipes.keys():
-            print(r)
-        print('\n')
     elif choice == 'exit' or choice == 'quit':
         print('Bye!')
-        sys.exit()
+        continue
+    sys.exit()
 
 # TODO
 # tab autocompletion
