@@ -41,23 +41,21 @@ def bakerCalc(flour, style=recipes['dopny']):
 
 def printTable(style):
     """ Make a neat table to print the ingredients """
-
     lWidth = 12
     rWidth = 7
-    totalIngredients = 0
-    # was trying to print the title of the recipe but I can't figure it out
-    # print(str(style.keys).upper().center(lWidth + rWidth, '-'))
-    print('\n')
+    totalWeight = 0
     print('flour'.title().ljust(lWidth, '.') + flour.rjust(rWidth))
     for i, amount in style.items():
         print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
-        totalIngredients = totalIngredients + amount
+        totalWeight = totalWeight + amount
     print('\n')
-    totalIngredients = totalIngredients + int(flour)
-    
-    pies = round(totalIngredients / 260)
+
+    # sum the total weight of the ingredients and divide by 260g
+    # to get the amount of pies
+    totalWeight = totalWeight + int(flour)
+    pies = round(totalWeight / 260)
     print('That should be enough for ' + str(pies) + ' pies (' +
-            str(round(totalIngredients / pies)) + ' each)')
+            str(round(totalWeight / pies)) + ' each)')
 
 completer = autoComplete(recipes.keys())
 readline.set_completer(completer.complete)
@@ -65,8 +63,9 @@ readline.parse_and_bind('tab: complete')
 
 choice = ''
 while not choice.isdigit() or choice not in recipes:
-    print("Choose a recipe:\n")
+    print("Choose a recipe")
     indx = 1
+    # print recipes in 3 columns
     while indx < len(recipes):
         for r in recipes.keys():
             if indx % 3 == 0:
@@ -74,23 +73,23 @@ while not choice.isdigit() or choice not in recipes:
             else:
                 print(str(indx) + '.', r.title().ljust(18, ' '), end=' ')
             indx = indx + 1
-    print("\nOr enter the desired amount of flour:\n")
+    print("\nOr enter an amount of flour:")
     choice = input('> ').lower()
     if choice.isdigit():
         flour = choice
+        print("\n")
+        print("DOPNY".center(19, '_'))
         printTable(bakerCalc(flour))
     elif choice in recipes:
         flour = ''
         while not flour.isdigit():
             flour = input('Type the desired amount of flour: ')
-        workingRecipe = bakerCalc(flour, recipes[choice])
-        printTable(workingRecipe)
-    elif choice == 'exit' or choice == 'quit':
+        print("\n")
+        print((choice.upper().center(19, '_')))
+        printTable(bakerCalc(flour, recipes[choice]))
+    elif choice == 'exit' or choice in 'quit':
         print('Bye!')
-        continue
     sys.exit()
 
 # TODO
-# tab autocompletion
-# add recipes
-# print recipes in columns
+# implement biga, poolish and starter
