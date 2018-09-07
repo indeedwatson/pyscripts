@@ -55,7 +55,7 @@ def printTable(style):
     totalWeight = totalWeight + int(flour)
     pies = round(totalWeight / 260)
     print('That should be enough for ' + str(pies) + ' pies (' +
-            str(round(totalWeight / pies)) + ' each)')
+            str(round(totalWeight / pies)) + 'g each)')
 
 completer = autoComplete(recipes.keys())
 readline.set_completer(completer.complete)
