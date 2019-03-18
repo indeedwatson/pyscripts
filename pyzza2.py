@@ -2,6 +2,7 @@
 import sys
 import json
 import readline
+from tabulate import tabulate
 
 with open('./recipes.json', 'r') as f:
     recipes = json.load(f)
@@ -32,23 +33,23 @@ def bakerCalc(flour, style=recipes['dopny']):
     """ Take an amount of flour and calculate the rest of the ingredients
     Defaults to dopny if no recipe is specified
     """
-    workingRecipe = {}
+    workingRecipe = {'flour': flour}
     for i in style.keys():
         ingredient = float(flour) * float(style[i]) / 100
         workingRecipe[i] = ingredient
     return workingRecipe
 
 
-def printTable(style):
-    """ Make a neat table to print the ingredients """
-    lWidth = 12
-    rWidth = 7
+def printMarkdownTable(ingredients):
     totalWeight = 0
-    print('flour'.title().ljust(lWidth, '.') + flour.rjust(rWidth))
-    for i, amount in style.items():
-        print(i.title().ljust(lWidth, '.') + str(style[i]).rjust(rWidth))
-        totalWeight = totalWeight + amount
-    print('\n')
+    table = []
+    headers = ["Ingredient", "Amount", "%"]
+    for k,v in ingredients.items():
+        # re-calculate the % of each ingredient so it can be printed, truncating
+        # at 2 decimal places
+        percent = float('%.2f'%(float(v))) * 100.0 / float(ingredients['flour'])
+        table.append([k, v, percent])
+    print(tabulate(table, headers, tablefmt="github", numalign="right"))
 
     # sum the total weight of the ingredients and divide by 260g
     # to get the amount of pies
@@ -78,15 +79,15 @@ while not choice.isdigit() or choice not in recipes:
     if choice.isdigit():
         flour = choice
         print("\n")
-        print("DOPNY".center(19, '_'))
-        printTable(bakerCalc(flour))
+        # print("DOPNY".center(19, '_'))
+        printMarkdownTable(bakerCalc(flour))
     elif choice in recipes:
         flour = ''
         while not flour.isdigit():
             flour = input('Type the desired amount of flour: ')
         print("\n")
-        print((choice.upper().center(19, '_')))
-        printTable(bakerCalc(flour, recipes[choice]))
+        # print((choice.upper().center(19, '_')))
+        printMarkdownTable(bakerCalc(flour, recipes[choice]))
     elif choice == 'exit' or choice in 'quit':
         print('Bye!')
     sys.exit()
