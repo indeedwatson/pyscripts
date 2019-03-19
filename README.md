@@ -12,3 +12,4 @@ Then follow the instructions
 TODO:
 - [X] autocomplete (basically stole it from stackexchange)
 - [ ] separate recipes into pizza, bread and others (such as tortillas)
+- [ ] make separate function to print the total dough weight
