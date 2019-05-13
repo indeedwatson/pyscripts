@@ -44,7 +44,14 @@ def bakerCalc(flour, style=recipes['dopny']):
     return workingRecipe
 
 
-def printTotal(totalWeight):
+def totalCalc(recipe):
+    totalWeight = 0
+    for k,v in recipe.items():
+        totalWeight = totalWeight + v
+    return int(totalWeight)
+
+
+def eachPie(totalWeight):
     # sum the total weight of the ingredients and divide by 260g
     # to get the amount of pies
     # totalWeight = lamda i: for i in recipe[i]
@@ -55,18 +62,19 @@ def printTotal(totalWeight):
 
 
 def printMarkdownTable(ingredients):
-    totalWeight = 0
+    total = totalCalc(ingredients)
     table = []
     headers = ["Ingredient", "Amount", "%"]
     for k,v in ingredients.items():
         # re-calculate the % of each ingredient so it can be printed, truncating
         # at 2 decimal places
-        percent = float('%.2f'%(float(v))) * 100.0 / float(ingredients['flour'])
+        percent = v * 100.0 / float(ingredients['flour'])
+        percent = '{:.2f}'.format(percent)
+        v = '{:.2f}'.format(v)
         table.append([k, v, percent])
-        totalWeight = totalWeight + v
-    table.append(["---", "---", "---"])
-    table.append(["total", totalWeight, None])
-    print(tabulate(table, headers, tablefmt="github", numalign="right"))
+    #table.append(["---", "---", "---"])
+    table.append(["TOTAL", total, None])
+    print(tabulate(table, headers, numalign='right', tablefmt="github"))
     print('\n')
 
 completer = autoComplete(recipes.keys())
@@ -89,16 +97,15 @@ while not choice.isdigit() or choice not in recipes:
     choice = input('> ').lower()
     if choice.isdigit():
         flour = choice
+        choice = "dopny"
         print("\n")
-        # print("DOPNY".center(19, '_'))
-        printMarkdownTable(bakerCalc(flour))
     elif choice in recipes:
         flour = ''
         while not flour.isdigit():
             flour = input('Type the desired amount of flour: ')
         print("\n")
-        print(choice + "\n")
-        printMarkdownTable(bakerCalc(flour, recipes[choice]))
     elif choice == 'exit' or choice in 'quit':
         print('Bye!')
+    print(choice.upper() + "\n")
+    printMarkdownTable(bakerCalc(flour, recipes[choice]))
     sys.exit()
