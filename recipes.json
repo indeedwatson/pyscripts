@@ -4,11 +4,14 @@
     "sicilian": {"water": 70, "salt": 2, "yeast": 1, "malt": 2, "oil": 1},
     "hybrid": 
         {"water": 67, "salt": 2.2, "yeast": 0.5, "malt": 0.25, "oil": 3, 
-         "sugar": 2.2, "poolish": 20},
+         "sugar": 2.2, "starter": {"flour": 10, "water": 10, "IDY": 0.01}},
     "refrigerated": {"water": 70, "salt": 2.6, "yeast": 0.3},
     "tortilla": {"lard": 20, "water": 70, "salt": 2},
     "seriouseats ny": {"water": 67, "sugar": 2, "salt": 1.5,"olive oil": 5},
-    "dopny": {"water": 61, "sugar": 2, "salt": 1.75, "oil": 3, "yeast": 0.5, "malt": 0.25},
+    "dopny": {"water": 61, "sugar": 2, "salt": 1.75, "oil": 3, "yeast": 0.5, 
+        "malt": 0.25},
     "roman": {"water": 52, "salt": 2, "sugar": 1.1, "yeast": 0.77},
-    "pain a l'ancienne rustic bread": {"water": 80, "salt": 1.95, "IDY": 0.7}
+    "pain a l'ancienne rustic bread": {"water": 80, "salt": 1.95, "IDY": 0.7},
+    "apizza": {"water": 60, "salt": 2.769, "IDY": 0.0405, 
+        "starter": {"flour": 26.624, "water": 21.2992, "IDY": 0.0138 }}
 }
