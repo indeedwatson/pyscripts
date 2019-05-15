@@ -49,7 +49,7 @@ def eachPie(recipe):
 
 
 def printTable(ingredients):
-    total = sum(ingredients.values())
+    total = int(sum(ingredients.values()))
     table = []
     headers = ["Ingredient", "Amount", "%"]
     for k,v in ingredients.items():
@@ -78,13 +78,13 @@ if __name__ == "__main__":
         while not flour.isdigit():
             flour = input('Type the desired amount of flour: ')
     print("\n================================================")
-    print("####" + choice.upper())
+    print("#### %s\n"% choice.upper())
     if "starter" in recipes[choice]:
         print("##### Starter")
         printTable(recipes[choice]["starter"])
         print("##### Final Dough")
     recipe = bakerCalc(flour, recipes[choice])
-    printMarkdownTable(bakerCalc(flour, recipes[choice]))
+    printTable(recipe)
     printPies(recipes[choice])
     print("================================================\n")
     main()
