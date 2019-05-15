@@ -29,7 +29,7 @@ class autoComplete(object):
             return None
 
 
-def bakerCalc(flour, style=recipes['dopny']):
+def bakerCalc(flour: int, style):
     """ Take an amount of flour and calculate the rest of the ingredients
     Defaults to dopny if no recipe is specified
     """
@@ -43,12 +43,12 @@ def bakerCalc(flour, style=recipes['dopny']):
     return workingRecipe
 
 
-def eachPie(recipe):
+def eachPie(recipe: dict):
     totalWeight = sum(recipe.values())
     pies = round(totalWeight / (pieWeight if pieWeight else 260))
 
 
-def printTable(ingredients):
+def printTable(ingredients: dict):
     total = int(sum(ingredients.values()))
     table = []
     headers = ["Ingredient", "Amount", "%"]
@@ -85,8 +85,7 @@ if __name__ == "__main__":
         print("##### Final Dough")
     recipe = bakerCalc(flour, recipes[choice])
     printTable(recipe)
-    printPies(recipes[choice])
+    #printPies(recipes[choice])
     print("================================================\n")
-    main()
 
 
