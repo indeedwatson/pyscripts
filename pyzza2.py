@@ -36,28 +36,20 @@ def bakerCalc(flour, style=recipes['dopny']):
     workingRecipe = {'flour': float(flour)}
     for i in style.keys():
         if i == "starter":
-            print("##### starter")
-            printMarkdownTable(bakerCalc(flour, style["starter"]))
+            workingRecipe["preferment"] = int(sum(style["starter"].values()) *
+                int(flour) / 100)
         else:
-            ingredient = float(flour) * float(style[i]) / 100
-            workingRecipe[i] = ingredient
+            workingRecipe[i] = float(flour) * float(style[i]) / 100
     return workingRecipe
 
 
-def totalCalc(recipe):
-    totalWeight = 0
-    for k,v in recipe.items():
-        totalWeight = totalWeight + v
-    return int(totalWeight)
-
-
 def eachPie(recipe):
-    totalWeight = totalCalc(recipe)
+    totalWeight = sum(recipe.values())
     pies = round(totalWeight / (pieWeight if pieWeight else 260))
 
 
-def printMarkdownTable(ingredients):
-    total = totalCalc(ingredients)
+def printTable(ingredients):
+    total = sum(ingredients.values())
     table = []
     headers = ["Ingredient", "Amount", "%"]
     for k,v in ingredients.items():
@@ -87,6 +79,11 @@ if __name__ == "__main__":
             flour = input('Type the desired amount of flour: ')
     print("\n================================================")
     print("####" + choice.upper())
+    if "starter" in recipes[choice]:
+        print("##### Starter")
+        printTable(recipes[choice]["starter"])
+        print("##### Final Dough")
+    recipe = bakerCalc(flour, recipes[choice])
     printMarkdownTable(bakerCalc(flour, recipes[choice]))
     printPies(recipes[choice])
     print("================================================\n")
