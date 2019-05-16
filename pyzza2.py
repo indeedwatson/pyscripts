@@ -29,11 +29,11 @@ class autoComplete(object):
             return None
 
 
-def bakerCalc(flour: int, style):
+def bakerCalc(flour: int, style: dict) -> dict:
     workingRecipe = {'flour': float(flour)}
     for i in style.keys():
         if i == "starter":
-            mult = int(sum(style["starter"].values()))
+            mult = int(totalWeight(style["starter"]))
             i = "preferment"
         else:
             mult = style[i]
@@ -41,17 +41,17 @@ def bakerCalc(flour: int, style):
     return workingRecipe
 
 
-def dividePies(totalWeight, pieWeight: int):
+def dividePies(totalWeight: float, pieWeight: int) -> (float, float):
     pies = round(totalWeight / (pieWeight if pieWeight else 260))
     eachPie = round(totalWeight / pies)
     return pies, eachPie
 
 
-def totalWeight(recipe):
+def totalWeight(recipe: dict) ->float:
     return sum(recipe.values())
 
 
-def printTable(ingredients: dict):
+def printTable(ingredients: dict) -> str:
     total = int(sum(ingredients.values()))
     table = []
     headers = ["Ingredient", "Amount", "%"]

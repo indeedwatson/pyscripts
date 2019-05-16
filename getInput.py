@@ -3,7 +3,7 @@ import sys
 from pyzza2 import *
 
 
-def printPies(total):
+def printPies(total: float) -> str:
     print("Weight of each pie: ")
     pieWeight = float(initChoice(printPies))
     while total < pieWeight:
@@ -33,7 +33,7 @@ def printRecipes():
     print("\nOr enter an amount of flour:")
 
 
-def initChoice(func):
+def initChoice(func) -> str:
     invalidInput = condition()
     while invalidInput:
         func
