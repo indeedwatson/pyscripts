@@ -36,7 +36,7 @@ def bakerCalc(flour: int, style):
             mult = int(sum(style["starter"].values()))
             i = "preferment"
         else:
-            mult = float(style[i])
+            mult = style[i]
         workingRecipe[i] = float(flour) * mult / 100
     return workingRecipe
 
@@ -83,7 +83,7 @@ def main():
     print("#### %s\n"% choice.upper())
     if "starter" in recipes[choice]:
         print("##### Starter")
-        printTable(recipes[choice]["starter"])
+        printTable(bakerCalc(flour, recipes[choice]["starter"]))
         print("##### Final Dough")
     recipe = bakerCalc(flour, recipes[choice])
     total = totalWeight(recipe)
