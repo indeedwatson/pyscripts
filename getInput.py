@@ -3,18 +3,20 @@ import sys
 from pyzza2 import *
 
 
-def printPies(ingredients):
+def printPies(total):
     print("Weight of each pie: ")
-    pieWeight = initChoice(printPies)
-    #totalWeight = eachPie(totalCalc(recipe))
-    totalWeight = totalCalc(ingredients)
-    pies = eachPie(ingredients)
-    #im so confused what's happening here and eachPie pls start over tomorrowsd
-    sd
-    sdf
-    sdfsdfs
-    print('That should be enough for ' + str(pies) + ' pies (' +
-          str(round(totalWeight / pies)) + 'g each)\n')
+    pieWeight = float(initChoice(printPies))
+    while total < pieWeight:
+        print(f"Math is not my strong suit either,\n\
+but if the recipe makes {int(total)}g of total dough\n\
+you can't make a pie that's {int(pieWeight)}g!\n")
+        pieWeight = float(initChoice(printPies))
+    while pieWeight < 151:
+        print(str(pieWeight) + "g is too small for a pizza! If you're on a diet take the \
+                meal off and enjoy a good pizza of at least 150g dough") 
+        pieWeight = float(initChoice(printPies))
+    pies, eachPie = dividePies(total, pieWeight)
+    print(f'That should be enough for {str(pies)} pies, {str(eachPie)}g each.\n')
 
 
 def printRecipes():
@@ -43,7 +45,7 @@ def initChoice(func):
     return choice
 
 
-def condition(param=''):
+def condition(param='') -> bool:
     if not param.isdigit() and param not in recipes:
         return True
     else:

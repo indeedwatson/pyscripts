@@ -43,9 +43,14 @@ def bakerCalc(flour: int, style):
     return workingRecipe
 
 
-def eachPie(recipe: dict):
-    totalWeight = sum(recipe.values())
+def dividePies(totalWeight, pieWeight: int):
     pies = round(totalWeight / (pieWeight if pieWeight else 260))
+    eachPie = round(totalWeight / pies)
+    return pies, eachPie
+
+
+def totalWeight(recipe):
+    return sum(recipe.values())
 
 
 def printTable(ingredients: dict):
@@ -67,8 +72,7 @@ completer = autoComplete(recipes.keys())
 readline.set_completer(completer.complete)
 readline.parse_and_bind('tab: complete')
 
-
-if __name__ == "__main__":
+def main():
     choice = initChoice(printRecipes())
     if choice.isdigit():
         flour = choice
@@ -84,8 +88,12 @@ if __name__ == "__main__":
         printTable(recipes[choice]["starter"])
         print("##### Final Dough")
     recipe = bakerCalc(flour, recipes[choice])
+    total = totalWeight(recipe)
     printTable(recipe)
-    #printPies(recipes[choice])
+    printPies(total)
+
     print("================================================\n")
+    main()
 
-
+if __name__ == "__main__":
+    main()
