@@ -30,16 +30,14 @@ class autoComplete(object):
 
 
 def bakerCalc(flour: int, style):
-    """ Take an amount of flour and calculate the rest of the ingredients
-    Defaults to dopny if no recipe is specified
-    """
     workingRecipe = {'flour': float(flour)}
     for i in style.keys():
         if i == "starter":
-            workingRecipe["preferment"] = int(sum(style["starter"].values()) *
-                int(flour) / 100)
+            mult = int(sum(style["starter"].values()))
+            i = "preferment"
         else:
-            workingRecipe[i] = float(flour) * float(style[i]) / 100
+            mult = float(style[i])
+        workingRecipe[i] = float(flour) * mult / 100
     return workingRecipe
 
 
