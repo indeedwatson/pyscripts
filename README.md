@@ -12,6 +12,6 @@ Then follow the instructions
 TODO:
 - [X] autocomplete (basically stole it from stackexchange)
 - [X] calculate preferments
-- [ ] make separate function to calculate the total dough weight
-- [ ] make separate function to divide the dough
-- [ ] separate recipes into pizza, bread and others (such as tortillas)
+- [X] make separate function to calculate the total dough weight
+- [X] make separate function to divide the dough
+- [ ] separate math and cli
