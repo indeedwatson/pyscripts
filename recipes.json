@@ -13,5 +13,10 @@
     "roman": {"water": 52, "salt": 2, "sugar": 1.1, "yeast": 0.77},
     "pain a l'ancienne rustic bread": {"water": 80, "salt": 1.95, "IDY": 0.7},
     "apizza": {"water": 60, "salt": 2.769, "IDY": 0.0405, 
-        "starter": {"flour": 26.624, "water": 21.2992, "IDY": 0.0138 }}
+        "starter": {"flour": 26.624, "water": 21.2992, "IDY": 0.0138 }},
+    "no-knead brioche": {"salt": 2.43, "IDY": 1.24, "eggs": 60.81, "water":
+        22.97, "sugar": 16.22, "butter": 67.57},
+    "pita": {"water": 60.71, "IDY": 2.32, "sugar": 4.46, "salt": 1.96,
+        "olive oil": 7.14, "canola oil": 6.25},
+    "empanada": {"water": 38, "salt": 3, "lard": 20}
 }
