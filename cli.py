@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-from bakerMath import bakerCalc, dividePies, totalWeight
+from bakerMath import dividePies, totalWeight
 from tabulate import tabulate
+from typing import List, Dict, Union, Callable
 import readline
 import sys
 
+FlatRecipe = Dict[str, Union[float, int]]
+Recipe = Dict[str, Union[float, int, FlatRecipe]]
 
 class Cli:
-    def __init__(self, recipes: dict):
+    def __init__(self, recipes: Recipe):
         self.recipes = recipes
 
     def printPies(self, total: float) -> str:
@@ -40,7 +43,7 @@ class Cli:
                 indx = indx + 1
         print("\nOr enter an amount of flour:")
 
-    def makeChoice(self, func, conditions: list) -> str:
+    def makeChoice(self, func, conditions: List[Callable[[str], bool]]) -> str:
         validInput = False
         while not validInput:
             func
@@ -73,7 +76,7 @@ class autoComplete(object):
             return None
 
 
-def printTable(ingredients: dict) -> str:
+def printTable(ingredients: FlatRecipe) -> str:
     total = int(sum(ingredients.values()))
     table = []
     headers = ["Ingredient", "Amount", "%"]

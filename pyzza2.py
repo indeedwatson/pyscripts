@@ -3,7 +3,6 @@ import json
 from cli import Cli, printTable
 from bakerMath import *
 
-
 try:
     with open('./recipes.json', 'r') as f:
         recipes = json.load(f)

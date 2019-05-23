@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+from typing import Union, Dict
+FlatRecipe = Dict[str, Union[float, int]]
+Recipe = Dict[str, Union[float, int, FlatRecipe]]
 
-
-def bakerCalc(flour: int, style: dict) -> dict:
+def bakerCalc(flour: int, style: Recipe) -> FlatRecipe:
     workingRecipe = {'flour': float(flour)}
     for i in style.keys():
         if i == "starter":
@@ -19,5 +21,5 @@ def dividePies(totalWeight: float, pieWeight: int) -> (float, float):
     return pies, eachPie
 
 
-def totalWeight(recipe: dict) ->float:
+def totalWeight(recipe: FlatRecipe) -> float:
     return sum(recipe.values())
